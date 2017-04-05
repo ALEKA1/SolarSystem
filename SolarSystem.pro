@@ -37,7 +37,8 @@ SOURCES += main.cpp \
     Scene/SceneObjects/planetring.cpp \
     SolarCore/cameracontroller.cpp \
     solar3dalphaobject.cpp \
-    Scene/SceneObjects/earthcloud.cpp
+    Scene/SceneObjects/earthcloud.cpp \
+    SolarCore/SolarRender/solarlight.cpp
 
 HEADERS += \
     solarsystemobject.h \
@@ -65,7 +66,8 @@ HEADERS += \
     Scene/SceneObjects/planetring.h \
     SolarCore/cameracontroller.h \
     solar3dalphaobject.h \
-    Scene/SceneObjects/earthcloud.h
+    Scene/SceneObjects/earthcloud.h \
+    SolarCore/SolarRender/solarlight.h
 
 RESOURCES += \
     res.qrc
@@ -79,7 +81,11 @@ DISTFILES += \
     QML/SolarFrame.qml \
     QML/PlanetList.qml \
     QML/PlanetButton.qml \
-    QML/Info.qml
+    QML/Info.qml \
+    Resources/Shaders/shadowmap.vert \
+    Resources/Shaders/shadowmap.frag \
+    Resources/Shaders/diffusenormal.vert \
+    Resources/Shaders/diffusenormal.frag
 
 
 #for app icon
