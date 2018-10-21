@@ -32,25 +32,25 @@ struct SolarSystem::SolarMathCore::Data
     float deltaTime = 0;
 
     // Time scale formula based on http://www.stjarnhimlen.se/comp/ppcomp.html
-    double startD;
-    double oldTimeD;
-    double currentTimeD;
-    double deltaTimeD = 0;
-    double daysPerFrame = 0;
-    double daysPerFrameScale = 0;
+    float startD;
+    float oldTimeD;
+    float currentTimeD;
+    float deltaTimeD = 0;
+    float daysPerFrame = 0;
+    float daysPerFrameScale = 0;
     float planetScale;
     bool focusedScaling = false;
     int focusedMinimumScale = 20;
-    double actualScale;
-    double ultraSpeed = 1.0;
+    float actualScale;
+    float ultraSpeed = 1.0;
     float ultraSpeedStep = 2.0f;
-    double ultraSpeedMax = 64.0;
+    float ultraSpeedMax = 64.0;
 
     //inner and outer radius
-    double saturnRingInnerRadius = 0;
-    double saturnRingOuterRadius = 0;
-    double uranusRingInnerRadius = 0;
-    double uranusRingOuterRadius = 0;
+    float saturnRingInnerRadius = 0;
+    float saturnRingOuterRadius = 0;
+    float uranusRingInnerRadius = 0;
+    float uranusRingOuterRadius = 0;
 
     //earth cloud
     float earthCloudRModifier = 1.010f;     //1.010f
@@ -82,11 +82,11 @@ SolarSystem::SolarMathCore::Data::Data()
     //calcualting saturn and uranus rings
     auto saturn = solarContainer.solarObject(SolarObjects::Saturn);
     saturnRingOuterRadius = saturn->radius() + SolarValues::saturnOuterRadius;
-    saturnRingInnerRadius = saturn->radius() + 6.630;
+    saturnRingInnerRadius = saturn->radius() + 6.630f;
 
     auto uranus = solarContainer.solarObject(SolarObjects::Uranus);
     uranusRingOuterRadius = uranus->radius() + SolarValues::uranusOuterRadius;
-    uranusRingInnerRadius = uranus->radius() + 2.0;
+    uranusRingInnerRadius = uranus->radius() + 2.0f;
 }
 
 SolarSystem::SolarMathCore::Data::~Data()
@@ -195,28 +195,28 @@ void SolarSystem::SolarMathCore::solarObjectPosition(SolarSystem::SolarObjects o
         if (object != SolarObjects::Sun)
         {
             // Calculate the planet orbital elements from the current time in days
-            auto N = (solarObj->N1() + solarObj->N2() * data->currentTimeD) * M_PI/ 180;
-            auto iPlanet = (solarObj->i1() + solarObj->i2() * data->currentTimeD) * M_PI / 180;
-            auto w = (solarObj->w1() + solarObj->w2() * data->currentTimeD) * M_PI / 180;
-            auto a = solarObj->a1() + solarObj->a2() * data->currentTimeD;
-            auto e = solarObj->e1() + solarObj->e2() * data->currentTimeD;
-            auto M = (solarObj->M1() + solarObj->M2() * data->currentTimeD) * M_PI / 180;
-            auto E = M + e * std::sin(M) * (1.0 + e * std::cos(M));
+            float N = (solarObj->N1() + solarObj->N2() * data->currentTimeD) * (float)M_PI/ 180;
+            float iPlanet = (solarObj->i1() + solarObj->i2() * data->currentTimeD) * (float)M_PI / 180;
+            float w = (solarObj->w1() + solarObj->w2() * data->currentTimeD) * (float)M_PI / 180;
+            float a = solarObj->a1() + solarObj->a2() * data->currentTimeD;
+            float e = solarObj->e1() + solarObj->e2() * data->currentTimeD;
+            float M = (solarObj->M1() + solarObj->M2() * data->currentTimeD) * (float)M_PI / 180;
+            float E = M + e * std::sin(M) * (1.0f + e * std::cos(M));
 
-            auto xv = a * (std::cos(E) - e);
-            auto yv = a * (std::sqrt(1.0 - e * e) * std::sin(E));
-            auto v = std::atan2(yv, xv);
+            float xv = a * (std::cos(E) - e);
+            float yv = a * (std::sqrt(1.0f - e * e) * std::sin(E));
+            float v = std::atan2(yv, xv);
 
             // Calculate the distance (radius)
-            auto r = std::sqrt(xv * xv + yv * yv);
+            float r = std::sqrt(xv * xv + yv * yv);
 
             // From http://www.davidcolarusso.com/astro/
             // Modified to compensate for the right handed coordinate system of OpenGL
-            auto xh = r * (std::cos(N) * std::cos(v + w)
+            float xh = r * (std::cos(N) * std::cos(v + w)
                            - std::sin(N) * std::sin(v + w) * std::cos(iPlanet));
-            auto zh = -r * (std::sin(N) * std::cos(v + w)
+            float zh = -r * (std::sin(N) * std::cos(v + w)
                             + std::cos(N) * std::sin(v + w) * std::cos(iPlanet));
-            auto yh = r * (std::sin(w + v) * std::sin(iPlanet));
+            float yh = r * (std::sin(w + v) * std::sin(iPlanet));
 
             // Apply the position offset from the center of orbit to the bodies
             SolarObjects centerOfOrbit = solarObj->centerOfOrbit();
@@ -227,7 +227,7 @@ void SolarSystem::SolarMathCore::solarObjectPosition(SolarSystem::SolarObjects o
             solarObj->setZ(centerObj->z() + zh * SolarValues::auScale);
         }
 
-        solarObj->setRoll((solarObj->roll() + data->deltaTimeD/ solarObj->period() * 360.0));
+        solarObj->setRoll((solarObj->roll() + data->deltaTimeD/ solarObj->period() * 360.0f));
 
         //recalculation to 3D objects
         SolarObject3D* visualSolarObject = data->container->planets()[object];
@@ -248,9 +248,9 @@ void SolarSystem::SolarMathCore::advanceTime(SolarSystem::SolarObjects object)
     if (object == SolarObjects::SolarSystemView)
         data->daysPerFrame = data->daysPerFrameScale; //*10
     else if (object == SolarObjects::Mercury || object == SolarObjects::Venus)
-        data->daysPerFrame = data->daysPerFrameScale * data->solarContainer.solarObject(object)->period()/15000.0;
+        data->daysPerFrame = data->daysPerFrameScale * data->solarContainer.solarObject(object)->period()/15000.0f;
     else
-        data->daysPerFrame = data->daysPerFrameScale * data->solarContainer.solarObject(object)->period()/100.0;
+        data->daysPerFrame = data->daysPerFrameScale * data->solarContainer.solarObject(object)->period()/100.0f;
 
     //add solar time
     data->solarTime = data->solarTime.addMSecs(data->deltaTime * 1000.0f * data->daysPerFrame * data->ultraSpeed);
@@ -477,8 +477,9 @@ void SolarSystem::SolarMathCore::calculateAllSolarObjectsPosiitons()
     auto updateCount = data->container->planetsNumber();
 
     //update solar objects position
-    for (int i = 0; i < updateCount; ++i)
-        solarObjectPosition((SolarObjects)i);
+    for (int i = 0; i < updateCount; ++i) {
+        solarObjectPosition(static_cast<SolarObjects>(i));
+    }
 }
 
 void SolarSystem::SolarMathCore::setupPlanetRings()

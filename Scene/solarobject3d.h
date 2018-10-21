@@ -74,23 +74,23 @@ namespace SolarSystem
         Qt3DRender::QMaterial* material() const;
 
         //control
-        double r() const;
-        void setR(double r);
+        float r() const;
+        void setR(float r);
 
-        double x() const;
-        void setX(double x);
+        float x() const;
+        void setX(float x);
 
-        double y() const;
-        void setY(double y);
+        float y() const;
+        void setY(float y);
 
-        double z() const;
-        void setZ(double z);
+        float z() const;
+        void setZ(float z);
 
-        double roll() const;
-        void setRoll(double roll);
+        float roll() const;
+        void setRoll(float roll);
 
-        double tilt() const;
-        void setTilt(double tilt);
+        float tilt() const;
+        void setTilt(float tilt);
 
     protected:
 
@@ -107,12 +107,12 @@ namespace SolarSystem
         //main data
         SolarSystem::SolarObjects m_SolarType;
         SolarSystem::SolarMaterials m_MaterialType = SolarMaterials::None;
-        double m_R = 0;
-        double m_X = 0;
-        double m_Y = 0;
-        double m_Z = 0;
-        double m_Roll = 0;
-        double m_Tilt = 0;
+        float m_R = 0;
+        float m_X = 0;
+        float m_Y = 0;
+        float m_Z = 0;
+        float m_Roll = 0;
+        float m_Tilt = 0;
     };
 }
 

@@ -75,62 +75,62 @@ Qt3DRender::QMaterial* SolarSystem::SolarObject3D::material() const
     return m_Material;
 }
 
-double SolarSystem::SolarObject3D::r() const
+float SolarSystem::SolarObject3D::r() const
 {
     return m_R;
 }
 
-void SolarSystem::SolarObject3D::setR(double r)
+void SolarSystem::SolarObject3D::setR(float r)
 {
     m_R = r;
 }
 
-double SolarSystem::SolarObject3D::x() const
+float SolarSystem::SolarObject3D::x() const
 {
     return m_X;
 }
 
-void SolarSystem::SolarObject3D::setX(double x)
+void SolarSystem::SolarObject3D::setX(float x)
 {
     m_X = x;
 }
 
-double SolarSystem::SolarObject3D::y() const
+float SolarSystem::SolarObject3D::y() const
 {
     return m_Y;
 }
 
-void SolarSystem::SolarObject3D::setY(double y)
+void SolarSystem::SolarObject3D::setY(float y)
 {
     m_Y = y;
 }
 
-double SolarSystem::SolarObject3D::z() const
+float SolarSystem::SolarObject3D::z() const
 {
     return m_Z;
 }
 
-void SolarSystem::SolarObject3D::setZ(double z)
+void SolarSystem::SolarObject3D::setZ(float z)
 {
     m_Z = z;
 }
 
-double SolarSystem::SolarObject3D::roll() const
+float SolarSystem::SolarObject3D::roll() const
 {
     return m_Roll;
 }
 
-void SolarSystem::SolarObject3D::setRoll(double roll)
+void SolarSystem::SolarObject3D::setRoll(float roll)
 {
     m_Roll = roll;
 }
 
-double SolarSystem::SolarObject3D::tilt() const
+float SolarSystem::SolarObject3D::tilt() const
 {
     return m_Tilt;
 }
 
-void SolarSystem::SolarObject3D::setTilt(double tilt)
+void SolarSystem::SolarObject3D::setTilt(float tilt)
 {
     m_Tilt = tilt;
 }
