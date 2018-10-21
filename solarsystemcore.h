@@ -1,7 +1,6 @@
 #ifndef SOLARSYSTEMCORE_H
 #define SOLARSYSTEMCORE_H
 
-//only Qt3D materials in use
 #include <QString>
 #include <QStringList>
 #include <QVector3D>
@@ -9,72 +8,73 @@
 
 namespace SolarSystem
 {
-    //store all query strings for db
+    // store all query strings for db
     struct SolarStrings
     {
-        //db type
-        static const QString qSqlLite;
+        // db type
+        inline static const QString qSqlLite = "QSQLITE";
 
-        //help
-        static const QString dbName;
-        static const QString dbFileName;
-        static const QString dbFolder;
+        // help
+        inline static const QString dbName = "SolarSystem";
+        inline static const QString dbFileName = "SolarDB.db";
+        inline static const QString dbFolder = "/Database/";
 
-        //db fields
-        static const QString nameField;
-        static const QString type;
-        static const QString orbitalSpeed;
-        static const QString mass;
-        static const QString meanRadius;
-        static const QString surfaceTemp;
-        static const QString surfaceGravity;
-        static const QString volume;
-        static const QString siderealPeriod;
-        static const QString orbitalPeriod;
-        static const QString description;
+        // db fields
+        inline static const QString nameField = "Name";
+        inline static const QString type = "SolarType";
+        inline static const QString orbitalSpeed = "OrbitalSpeed";
+        inline static const QString mass = "Mass";
+        inline static const QString meanRadius = "MeanRadius";
+        inline static const QString surfaceTemp = "Temperature";
+        inline static const QString surfaceGravity = "Gravity";
+        inline static const QString volume = "Volume";
+        inline static const QString siderealPeriod = "SiderealPeriod";
+        inline static const QString orbitalPeriod = "OrbitalPeriod";
+        inline static const QString description = "Description";
 
-        //SQL commands
-        static const QString select;
-        static const QString from;
-        static const QString where;
-        static const QString like;
-        static const QString all;
+        // SQL commands
+        inline static const QString select = "SELECT ";
+        inline static const QString from = " FROM ";
+        inline static const QString where = " WHERE ";
+        inline static const QString like = " LIKE";
+        inline static const QString all = "*";
+
         static QString likeObject(const QString& object);
 
-        //string representation of object type
-        static const QString planet;
-        static const QString dwarfPlanet;
-        static const QString star;
-        static const QString moon;
-        static const QString ring;
-        static const QString solarSystemBody;
-        static const QString galaxy;
-        static const QString asteroid;
+        // string representation of object type
+        inline static const QString planet = "Planet";
+        inline static const QString dwarfPlanet = "Dwarf planet";
+        inline static const QString star = "Star";
+        inline static const QString moon = "Moon";
+        inline static const QString ring = "Ring";
+        inline static const QString solarSystemBody = "Solar system body";
+        inline static const QString galaxy = "Galaxy";
+        inline static const QString asteroid = "Asteroid";
 
-        //add object types
+        // add object types
     };
 
-    //store different values for code help
+    // store different values for code help
     struct SolarValues
     {
-        static const int zero;
-        static const int solarDistance;
-        static const float auScale;
-        static const float saturnOuterRadius;
-        static const float uranusOuterRadius;
-        static const float startSize;
-        static const float startSpeed;
+        inline static const int zero = 0;
+        inline static const int solarDistance = 2600000;
+        inline static const float auScale = 149597.870700f;
+        inline static const float saturnOuterRadius = 120.700f;
+        inline static const float uranusOuterRadius = 40.0f;
+        inline static const float startSize = 1800;
+        inline static const float startSpeed = 1000000.0f;
 
-        //time scale values
-        static const int year;
-        static const int month;
-        static const int day;
+        // time scale values
+        inline static const int year = 2000;
+        inline static const int month = 1;
+        inline static const int day = 1;
 
-        //vector values
-        static const QVector3D rollAxis;
-        static const QVector3D tiltAxis;
+        // vector values
+        inline static const QVector3D rollAxis = QVector3D(0, 1, 0);
+        inline static const QVector3D tiltAxis = QVector3D(0, 0, 1);
 
-        //db fields
+        // db fields
     };
 
     enum SolarFields
@@ -92,7 +92,7 @@ namespace SolarSystem
         Description
     };
 
-    //solar system object type
+    // solar system object type
     enum class SolarSystemObjectType
     {
         SolarSystemBody,
@@ -105,8 +105,8 @@ namespace SolarSystem
         Galaxy
     };
 
-    //enum of all solar objects
-    //add new if you need
+    // enum of all solar objects
+    // add new if you need
     enum class SolarObjects
     {
         Sun,
@@ -121,16 +121,16 @@ namespace SolarSystem
         Moon,
         Pluto,
 
-        //add here
+        // add here
         SaturnRing,
         UranusRing,
         EarthCloud,
 
-        //calculate number
+        // calculate number
         SolarSystemView
     };
 
-    //all material types used in solar system project
+    // all material types used in solar system project
     enum class SolarMaterials
     {
         None,
@@ -144,24 +144,24 @@ namespace SolarSystem
         Unlit
     };
 
-    //store default camera settings
+    // store default camera settings
     namespace CameraSettings
     {
-        //camera up vector
+        // camera up vector
         const QVector3D defaultUp(0, 1, 0);
 
-        //default position
+        // default position
         const QVector3D defaultCameraPosition(SolarValues::solarDistance, SolarValues::solarDistance, SolarValues::solarDistance);
 
-        //near plane/far plane settings
+        // near plane/far plane settings
         const float nearPlane = 2500000.0;
         const float farPlane = 20000000.0;
 
-        //fov
+        // fov
         const int fieldOfView = 60;
     }
 
-    //for planet class
+    // for planet class
     namespace PlanetSettings
     {
         const float radius = 1.0f;
@@ -170,13 +170,13 @@ namespace SolarSystem
         const int slices = 64;
     }
 
-    //params for DB fields
+    // params for DB fields
     namespace DbParams
     {
         const QStringList paramList = {"", "", "km/s", "kg", "km", "K", "m/s2", "km3", "d", "d", ""};
     }
 
-    //planets math values
+    // planets math values
     namespace SolarObjectsValues
     {
         // Planet Data
@@ -192,13 +192,13 @@ namespace SolarSystem
         // centerOfOrbit - the planet in the center of the orbit
         // (orbital elements based on http://www.stjarnhimlen.se/comp/ppcomp.html)
 
-        //solar system values
+        // solar system values
         namespace SolarSystem
         {
             const QString toString = "Solar System";
         }
 
-        //sun values
+        // sun values
         namespace Sun
         {
             const float radius = 694.439f;
@@ -207,7 +207,7 @@ namespace SolarSystem
             const QString toString = "Sun";
         }
 
-        //mercury values
+        // mercury values
         namespace Mercury
         {
             const float radius = 2.433722f;
@@ -229,7 +229,7 @@ namespace SolarSystem
             const QString toString = "Mercury";
         }
 
-        //venus values
+        // venus values
         namespace Venus
         {
             const float radius = 6.046079f;
@@ -251,7 +251,7 @@ namespace SolarSystem
             const QString toString = "Venus";
         }
 
-        //earth values
+        // earth values
         namespace Earth
         {
             const float radius = 6.371f;
@@ -273,7 +273,7 @@ namespace SolarSystem
             const QString toString = "Earth";
         }
 
-        //mars values
+        // mars values
         namespace Mars
         {
             const float radius = 3.389372f;
@@ -295,7 +295,7 @@ namespace SolarSystem
             const QString toString = "Mars";
         }
 
-        //jupiter values
+        // jupiter values
         namespace Jupier
         {
             const float radius = 71.41254f;
@@ -317,7 +317,7 @@ namespace SolarSystem
             const QString toString = "Jupiter";
         }
 
-        //saturn values
+        // saturn values
         namespace Saturn
         {
             const float radius = 60.19958f;
@@ -339,7 +339,7 @@ namespace SolarSystem
             const QString toString = "Saturn";
         }
 
-        //uranus values
+        // uranus values
         namespace Uranus
         {
             const float radius = 25.5286f;
@@ -361,7 +361,7 @@ namespace SolarSystem
             const QString toString = "Uranus";
         }
 
-        //neptune values
+        // neptune values
         namespace Neptune
         {
             const float radius = 24.73859f;
@@ -383,7 +383,7 @@ namespace SolarSystem
             const QString toString = "Neptune";
         }
 
-        //pluto values
+        // pluto values
         namespace Pluto
         {
             const float radius = 1.187f;            //radius
@@ -405,7 +405,7 @@ namespace SolarSystem
             const QString toString = "Pluto";
         }
 
-        //moon values
+        // moon values
         namespace Moon
         {
             const float radius = 1.5424f;
