@@ -3,8 +3,6 @@ QT += 3dcore 3drender 3dextras 3dinput
 QT += qml quick
 QT += 3dquickextras
 
-CONFIG += c++14
-
 TARGET = SolarSystem
 
 CONFIG += resources_big
@@ -119,6 +117,13 @@ DISTFILES += \
 #for win app icon
 win32 {
     RC_ICONS += Resources/Images/solarsystem_icon.ico
+}
+
+win32-msvc* {
+    QMAKE_CXXFLAGS += /std:c++17
+}
+else {
+    QMAKE_CXXFLAGS += -std=c++17
 }
 
 #android setup
