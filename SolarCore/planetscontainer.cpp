@@ -18,8 +18,9 @@ SolarSystem::PlanetsContainer::~PlanetsContainer()
     {
         for (auto& elem : m_PlanetContainer)
         {
-            if (elem.second)
+            if (elem.second) {
                 delete elem.second;
+            }
         }
     }
 }

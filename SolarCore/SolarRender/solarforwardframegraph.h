@@ -17,7 +17,7 @@ namespace Qt3DRender
 
 namespace SolarSystem
 {
-    //Represents simple forward frame graph
+    // Represents simple forward frame graph
     class SolarForwardFrameGraph : public IFrameGraph
     {
         Q_OBJECT
@@ -28,7 +28,7 @@ namespace SolarSystem
 
     private:
 
-        //render frame graph elements
+        // render frame graph elements
         Qt3DRender::QSortPolicy* sortPolicy;
         Qt3DRender::QClearBuffers* clearBuffers;
         Qt3DRender::QCameraSelector* cameraSelector;

@@ -25,9 +25,11 @@ Entity {
     }
 
     function dbState() {
-        if (solarSystem.databaseStatus)
+        if (solarSystem.databaseStatus) {
             return "Ok"
-        else
+        }
+        else {
             return "Failured"
+        }
     }
 }

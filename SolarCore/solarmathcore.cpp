@@ -127,7 +127,7 @@ Qt3DRender::QCamera* SolarSystem::SolarMathCore::solarView() const
 
 float SolarSystem::SolarMathCore::getOuterRadius(SolarSystem::SolarObjects object)
 {
-    double outerRadius = SolarValues::solarDistance;
+    float outerRadius = SolarValues::solarDistance;
 
     switch (object) {
 
@@ -172,7 +172,7 @@ float SolarSystem::SolarMathCore::getOuterRadius(SolarSystem::SolarObjects objec
             break;
 
         case SolarObjects::Sun:
-            outerRadius = SolarObjectsValues::Sun::radius / 100.0;
+            outerRadius = SolarObjectsValues::Sun::radius / 100.0f;
             break;
 
         default:
@@ -195,12 +195,12 @@ void SolarSystem::SolarMathCore::solarObjectPosition(SolarSystem::SolarObjects o
         if (object != SolarObjects::Sun)
         {
             // Calculate the planet orbital elements from the current time in days
-            float N = (solarObj->N1() + solarObj->N2() * data->currentTimeD) * (float)M_PI/ 180;
-            float iPlanet = (solarObj->i1() + solarObj->i2() * data->currentTimeD) * (float)M_PI / 180;
-            float w = (solarObj->w1() + solarObj->w2() * data->currentTimeD) * (float)M_PI / 180;
+            float N = (solarObj->N1() + solarObj->N2() * data->currentTimeD) * static_cast<float>(M_PI/ 180);
+            float iPlanet = (solarObj->i1() + solarObj->i2() * data->currentTimeD) * static_cast<float>(M_PI / 180);
+            float w = (solarObj->w1() + solarObj->w2() * data->currentTimeD) * static_cast<float>(M_PI / 180);
             float a = solarObj->a1() + solarObj->a2() * data->currentTimeD;
             float e = solarObj->e1() + solarObj->e2() * data->currentTimeD;
-            float M = (solarObj->M1() + solarObj->M2() * data->currentTimeD) * (float)M_PI / 180;
+            float M = (solarObj->M1() + solarObj->M2() * data->currentTimeD) * static_cast<float>(M_PI / 180);
             float E = M + e * std::sin(M) * (1.0f + e * std::cos(M));
 
             float xv = a * (std::cos(E) - e);
@@ -253,7 +253,7 @@ void SolarSystem::SolarMathCore::advanceTime(SolarSystem::SolarObjects object)
         data->daysPerFrame = data->daysPerFrameScale * data->solarContainer.solarObject(object)->period()/100.0f;
 
     //add solar time
-    data->solarTime = data->solarTime.addMSecs(data->deltaTime * 1000.0f * data->daysPerFrame * data->ultraSpeed);
+    data->solarTime = data->solarTime.addMSecs(static_cast<int>(data->deltaTime * 1000.0f * data->daysPerFrame * data->ultraSpeed));
 
     //save helpers values
     data->hours = data->solarTime.time().hour();
@@ -290,13 +290,16 @@ void SolarSystem::SolarMathCore::updateSolarView(SolarSystem::SolarObjects objec
     SolarObject3D* solarObj = nullptr;
     PlanetArray& planets = data->container->planets();
 
-    if (object != SolarObjects::SolarSystemView)
+    if (object != SolarObjects::SolarSystemView) {
         solarObj = planets[object];
-    else
+    }
+    else {
         solarObj = planets[SolarObjects::Sun];
+    }
 
-    if (solarObj != nullptr)
-        data->camera->setViewCenter(QVector3D(solarObj->x(), solarObj->y(), solarObj->z()));
+    if (solarObj != nullptr) {
+        data->camera->viewEntity(qobject_cast<Qt3DCore::QEntity*>(solarObj));
+    }
 }
 
 void SolarSystem::SolarMathCore::setSolarSystemSpeed(float speed)
@@ -462,7 +465,7 @@ void SolarSystem::SolarMathCore::changeExtraSpeed() const
         data->ultraSpeed = 1.0;
 }
 
-double SolarSystem::SolarMathCore::extraSpeed() const
+float SolarSystem::SolarMathCore::extraSpeed() const
 {
     return data->ultraSpeed;
 }
@@ -496,7 +499,7 @@ void SolarSystem::SolarMathCore::setupPlanetRings()
         saturnRing->setZ(saturn->z());
         saturnRing->setTilt(saturn->tilt());
         saturnRing->setRoll(saturn->roll()/10.0f);
-        saturnRing->setR((data->saturnRingInnerRadius + data->saturnRingOuterRadius)/1.75);
+        saturnRing->setR((data->saturnRingInnerRadius + data->saturnRingOuterRadius)/1.750f);
     }
 
     if (planets.count(SolarObjects::UranusRing) && planets.count(SolarObjects::Uranus))
@@ -509,7 +512,7 @@ void SolarSystem::SolarMathCore::setupPlanetRings()
         uranusRings->setZ(uranus->z());
         uranusRings->setTilt(uranus->tilt());
         uranusRings->setRoll(uranus->roll()/10.0f);
-        uranusRings->setR((data->uranusRingInnerRadius + data->uranusRingOuterRadius)/1.75);
+        uranusRings->setR((data->uranusRingInnerRadius + data->uranusRingOuterRadius)/1.750f);
     }
 }
 

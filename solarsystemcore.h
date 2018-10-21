@@ -56,19 +56,21 @@ namespace SolarSystem
 
     // store different values for code help
     struct SolarValues
-    {
-        inline static const int zero = 0;
-        inline static const int solarDistance = 2600000;
-        inline static const float auScale = 149597.870700f;
-        inline static const float saturnOuterRadius = 120.700f;
-        inline static const float uranusOuterRadius = 40.0f;
-        inline static const float startSize = 1800;
-        inline static const float startSpeed = 1000000.0f;
+    {        
+        inline static constexpr float zero = 0;
+        inline static constexpr float solarDistance = 2600000.0f;
+        inline static constexpr float auScale = 149597.870700f;
+
+        inline static constexpr float saturnOuterRadius = 120.700f;
+        inline static constexpr float uranusOuterRadius = 40.0f;
+
+        inline static constexpr float startSize = 1800.0f;
+        inline static constexpr float startSpeed = 1000000.0f;
 
         // time scale values
-        inline static const int year = 2000;
-        inline static const int month = 1;
-        inline static const int day = 1;
+        inline static constexpr int year = 2000;
+        inline static constexpr int month = 1;
+        inline static constexpr int day = 1;
 
         // vector values
         inline static const QVector3D rollAxis = QVector3D(0, 1, 0);
@@ -154,8 +156,8 @@ namespace SolarSystem
         const QVector3D defaultCameraPosition(SolarValues::solarDistance, SolarValues::solarDistance, SolarValues::solarDistance);
 
         // near plane/far plane settings
-        const float nearPlane = 2500000.0;
-        const float farPlane = 20000000.0;
+        const float nearPlane = 2500000.0f;
+        const float farPlane = 20000000.0f;
 
         // fov
         const int fieldOfView = 60;

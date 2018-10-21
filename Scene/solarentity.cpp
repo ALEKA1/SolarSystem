@@ -30,7 +30,6 @@ SolarSystem::SolarEntity::SolarEntity(QNode* parent):
     //orbit camera controller
     auto controller = new SolarSystem::CameraController(this);
     controller->setCamera(mainCamera);
-    controller->setLookSpeed(controller->lookSpeed() * 1.2f);
 
     //skybox
     skybox = new SolarSkyBox(this);

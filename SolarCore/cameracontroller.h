@@ -4,7 +4,6 @@
 #include <Qt3DCore/QEntity>
 #include <QVector3D>
 
-//forward
 namespace Qt3DRender
 {
     class QCamera;
@@ -22,7 +21,7 @@ namespace Qt3DInput
 
 namespace SolarSystem
 {
-    //view controll
+    // view controll
     class CameraController : public Qt3DCore::QEntity
     {
         Q_OBJECT
@@ -30,7 +29,7 @@ namespace SolarSystem
     public:
         explicit CameraController(Qt3DCore::QNode* parent = nullptr);
 
-        //camera setup
+        // camera setup
         void setCamera(Qt3DRender::QCamera* camera);
         Qt3DRender::QCamera* camera() const;
 
@@ -51,16 +50,16 @@ namespace SolarSystem
 
     private:
 
-        //camera ref
+        // camera ref
         Qt3DRender::QCamera* viewCamera = nullptr;
 
-        //logical device
+        // logical device
         Qt3DInput::QLogicalDevice* logicalDevice;
 
-        //mouse device
+        // mouse device
         Qt3DInput::QMouseDevice* mouseDevice;
 
-        //input fields
+        // input fields
         Qt3DInput::QAction* mouseButtonAction;
         Qt3DInput::QActionInput* mouseButtonInput;
         Qt3DInput::QAxis* mouseX_Axis;
@@ -68,31 +67,31 @@ namespace SolarSystem
         Qt3DInput::QAnalogAxisInput* mouseX_Input;
         Qt3DInput::QAnalogAxisInput* mouseY_Input;
 
-        //wheel
+        // wheel
         Qt3DInput::QAnalogAxisInput* mouseWheelX_Input;
         Qt3DInput::QAnalogAxisInput* mouseWheelY_Input;
         Qt3DInput::QAxis* mouseWheelX_Axis;
         Qt3DInput::QAxis* mouseWheelY_Axis;
 
-        //values
-        float lookSpeedValue = 180.0f;
+        // values
+        float lookSpeedValue = 180.0f * 1.2f;
         float defaultZoomLimitValue = 200000.0f;
         float defaultZoomSpeedValue = 5000000.0f;
         float zoomLimitValue = defaultZoomLimitValue;
         float zoomOutLimitValue = zoomLimitValue;
         float zoomSpeedValue = defaultZoomSpeedValue;
 
-        //up
+        // up
         QVector3D cameraUp = QVector3D(0.0f, 1.0f, 0.0f);
 
     private slots:
 
-        //update camera
+        // update camera
         void onFrameAction(float deltaTime);
 
     public slots:
 
-        //camera view center update
+        // camera view center update
         void changeViewCenter(const QVector3D& center);
     };
 }

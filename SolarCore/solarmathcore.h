@@ -16,8 +16,8 @@ namespace SolarSystem
     class CameraController;
     class SolarObjectsContainer;
 
-    //base solar math model
-    //some realizations used from Qt QML Planets example
+    // base solar math model
+    // some realizations used from Qt QML Planets example
     class SolarMathCore final : public QObject
     {
         Q_OBJECT
@@ -33,98 +33,96 @@ namespace SolarSystem
 
     public:
 
-        //creates solar math core only once
+        // creates solar math core only once
         static SolarMathCore* instance();
 
-        //sets camera
+        // sets camera
         void setSolarView(Qt3DRender::QCamera* camera);
 
-        //returns camera
+        // returns camera
         Qt3DRender::QCamera* solarView() const;
 
-        //returns outer radius of solar object
+        // returns outer radius of solar object
         float getOuterRadius(SolarObjects object);
 
-        //calcualtes current time
+        // calcualtes current time
         void advanceTime(SolarObjects object);
 
-        //checks and sets solar objects actual scale
+        // checks and sets solar objects actual scale
         void setSolarObjectsScale(float scale, bool focused = false);
 
-        //sets camera view center to solar object
+        // sets camera view center to solar object
         void updateSolarView(SolarObjects object);
 
-        //sets days per frame scale speed
+        // sets days per frame scale speed
         void setSolarSystemSpeed(float speed);
 
-        //sets planets container with SolarObject3D
+        // sets planets container with SolarObject3D
         void setPlanetsContainer(PlanetsContainer* planetsContainer);
 
-        //recalculate all system objects scale
+        // recalculate all system objects scale
         void changeSolarSystemScale(float scale, bool focused = false);
 
-        //sets to math core tick delta time
+        // sets to math core tick delta time
         void setDeltaTime(float dt);
 
-        //returns current calculated solar time
+        // returns current calculated solar time
         QDateTime getTime() const;
 
-        //calculates solar system non-planet positions
+        // calculates solar system non-planet positions
         void additionalCalculation();
 
-        //sets camera controller
+        // sets camera controller
         void setCameraController(CameraController* controller);
 
-        //returns camera controller
+        // returns camera controller
         CameraController* viewController() const;
 
-        //updates camera min zoom position
+        // updates camera min zoom position
         void updateSolarViewZoomLimit(SolarObjects object);
 
-        //returns solar object position
+        // returns solar object position
         QVector3D objectPosition(SolarObjects object);
 
-        //returns position of solar view to solar object
+        // returns position of solar view to solar object
         QVector3D viewPositionOfObject(SolarObjects object);
 
-        //returns current solar system speed (days per frame)
+        // returns current solar system speed (days per frame)
         float solarSystemSpeed() const;
 
-        //calcualtes next step of ultra speed
+        // calcualtes next step of ultra speed
         void changeExtraSpeed() const;
 
-        //returns utral speed
-        double extraSpeed() const;
+        // returns utral speed
+        float extraSpeed() const;
 
-        //sets uultra speed to default value
+        // sets uultra speed to default value
         void resetExtraSpeed() const;
 
-        //calculates all planets container solar objects position
+        // calculates all planets container solar objects position
         void calculateAllSolarObjectsPosiitons();
 
     private:
 
-        //forward
+        // pimpl
         struct Data;
-
-        //main math data
         Data* data;
 
-        ///helper methods
+        /// helper methods
 
         // calculates solar object current position
         void solarObjectPosition(SolarObjects object);
 
-        //rings setup
+        // rings setup
         void setupPlanetRings();
 
-        //earth cloud calculation
+        // earth cloud calculation
         void atmosphereCalculations();
 
-        //zoom limit calculation
+        // zoom limit calculation
         float calculateZoomLimit(SolarObjects object, float limit);
 
-        //zoom limit calcualtion base
+        // zoom limit calcualtion base
         float calculateZoomLimit(SolarObjects object);
     };
 }
